@@ -6,7 +6,8 @@ This project demonstrates the use of a private Ethereum blockchain as a distribu
 
 ## Set up Private Ethereum Network
 
-You should read this tutorial [here](./example_private_eth/tutorial.md)
+You should read my tutorial [here](./example_private_eth/tutorial.md).
+
 
 
 
