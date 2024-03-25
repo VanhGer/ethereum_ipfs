@@ -1,9 +1,4 @@
 .obsidian
 node_modules
-<<<<<<< HEAD
-node_modules
 *.env
 .idea
-=======
-node_modules
->>>>>>> aea11f0 (Add ipfs uploader)
