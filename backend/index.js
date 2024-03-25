@@ -1,11 +1,14 @@
 import {create} from 'ipfs-http-client';
-const ipfs = create('http://127.0.0.1:5001');
-
 import express from 'express'
 import cors from 'cors';
 import 'dotenv/config'
 import formidable, {errors as formidableErrors} from 'formidable';
 import fs from 'fs';
+
+const IPFS_API_PORT = process.env.IPFS_API_PORT || 5005
+const ipfs = create(`http://127.0.0.1:${IPFS_API_PORT}`);
+
+
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

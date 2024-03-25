@@ -1,0 +1,38 @@
+version: '3.8'
+
+networks:
+  ipfs_network:
+    driver: bridge
+
+services:
+  ipfs_node_1:
+    image: my_private_ipfs
+    container_name: ipfs_node_1
+    environment:
+      - IPFS_SWARM_KEY_FILE=/swarm.key
+      - IPFS_ROUTING=dht
+    
+    ports:
+      - "4005:4001"
+      - "4005:4001/udp"
+      - "8085:8080"
+      - "5005:5001"
+    user: root
+    networks:
+      - ipfs_network
+
+  ipfs_node_2:
+    image: my_private_ipfs
+    container_name: ipfs_node_2
+    environment:
+      - IPFS_SWARM_KEY_FILE=/swarm.key
+      - IPFS_ROUTING=dht
+    
+    ports:
+      - "4006:4001"
+      - "4006:4001/udp"
+      - "8086:8080"
+      - "5006:5001"
+    user: root
+    networks:
+      - ipfs_network
