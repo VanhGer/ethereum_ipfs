@@ -1,0 +1,45 @@
+version: '3.7'
+
+services:
+  mybootnode:
+    hostname: mybootnode
+    env_file:
+      - .env
+    build:
+      context: .
+      args:
+        - ACCOUNT_PASSWORD=${ACCOUNT_PASSWORD1}
+    command: --nodekeyhex="${BOOTNODE_KEY}" --nodiscover --ipcdisable --networkid=${NETWORK_ID}
+    networks:
+      priv-eth-net:
+
+
+  miner-1:
+    hostname: miner-1
+    env_file:
+      - .env
+    build:
+      context: .
+      args:
+        - ACCOUNT_PASSWORD=${ACCOUNT_PASSWORD2}
+    command: --bootnodes="enode://${ECODE_VALUE}@mybootnode:30303" --mine --miner.threads=1 --networkid=${NETWORK_ID}
+    networks:
+      priv-eth-net:
+
+
+  miner-2:
+    hostname: miner-2
+    env_file:
+      - .env
+    build:
+      context: .
+      args:
+        - ACCOUNT_PASSWORD=${ACCOUNT_PASSWORD3}
+    command: --bootnodes="enode://${ECODE_VALUE}@mybootnode:30303" --mine --miner.threads=1 --networkid=${NETWORK_ID}
+    networks:
+      priv-eth-net:
+
+
+networks:
+  priv-eth-net:
+    driver: bridge

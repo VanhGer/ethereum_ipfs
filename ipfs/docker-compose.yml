@@ -3,7 +3,9 @@ version: '3.8'
 networks:
   ipfs_network:
     driver: bridge
-
+volumes:
+  a:
+  b:
 services:
   ipfs_node_1:
     image: my_private_ipfs
@@ -11,7 +13,10 @@ services:
     environment:
       - IPFS_SWARM_KEY_FILE=/swarm.key
       - IPFS_ROUTING=dht
-    
+    volumes:
+      - type: volume
+        source: a
+        target: /data/ipfs
     ports:
       - "4005:4001"
       - "4005:4001/udp"
@@ -27,12 +32,15 @@ services:
     environment:
       - IPFS_SWARM_KEY_FILE=/swarm.key
       - IPFS_ROUTING=dht
-    
     ports:
       - "4006:4001"
       - "4006:4001/udp"
       - "8086:8080"
       - "5006:5001"
+    volumes:
+      - type: volume
+        source: b
+        target: /data/ipfs
     user: root
     networks:
       - ipfs_network
