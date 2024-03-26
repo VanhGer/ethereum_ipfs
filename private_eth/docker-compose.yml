@@ -9,7 +9,7 @@ services:
       context: .
       args:
         - ACCOUNT_PASSWORD=${ACCOUNT_PASSWORD1}
-    command: --nodekeyhex="${BOOTNODE_KEY}" --rpc --rpcaddr "0.0.0.0" --rpcport "8545" --http --http.corsdomain="https://remix.ethereum.org" --http.api web3,eth,debug,personal,net --nodiscover --ipcdisable --networkid=${NETWORK_ID}
+    command: --nodekeyhex="${BOOTNODE_KEY}" --rpc --rpcaddr "0.0.0.0" --rpcport "8545" --http --http.api web3,eth,debug,personal,net --nodiscover --ipcdisable --networkid=${NETWORK_ID}
     ports:
       - "8545:8545"
       - "30303:30303"
@@ -25,7 +25,7 @@ services:
       context: .
       args:
         - ACCOUNT_PASSWORD=${ACCOUNT_PASSWORD2}
-    command: --bootnodes="enode://${ECODE_VALUE}@mybootnode:30303" --rpc --rpcaddr "0.0.0.0" --rpcport "8545" --http --http.corsdomain="https://remix.ethereum.org" --http.api web3,eth,debug,personal,net --allow-insecure-unlock --mine --miner.threads=1 --networkid=${NETWORK_ID}
+    command: --bootnodes="enode://${ECODE_VALUE}@mybootnode:30303" --rpc --rpcaddr "0.0.0.0" --rpcport "8545" --http --http.api web3,eth,debug,personal,net --allow-insecure-unlock --networkid=${NETWORK_ID}
     ports:
       - "8546:8545"
       - "30306:30303"
@@ -41,13 +41,28 @@ services:
       context: .
       args:
         - ACCOUNT_PASSWORD=${ACCOUNT_PASSWORD3}
-    command: --bootnodes="enode://${ECODE_VALUE}@mybootnode:30303" --rpc --rpcaddr "0.0.0.0" --rpcport "8545" --http --http.corsdomain="https://remix.ethereum.org" --http.api web3,eth,debug,personal,net --allow-insecure-unlock --mine --miner.threads=1 --networkid=${NETWORK_ID}
+    command: --bootnodes="enode://${ECODE_VALUE}@mybootnode:30303" --rpc --rpcaddr "0.0.0.0" --rpcport "8545" --http  --http.api web3,eth,debug,personal,net --allow-insecure-unlock --networkid=${NETWORK_ID}
     ports:
       - "8547:8545"
       - "30307:30303"
     networks:
       priv-eth-net:
 
+
+  miner-3:
+    hostname: miner-3
+    env_file:
+      - .env
+    build:
+      context: .
+      args:
+        - ACCOUNT_PASSWORD=${ACCOUNT_PASSWORD4}
+    command: --bootnodes="enode://${ECODE_VALUE}@mybootnode:30303" --rpc --rpcaddr "0.0.0.0" --rpcport "8545" --http  --http.api web3,eth,debug,personal,net --allow-insecure-unlock --mine --miner.threads=1 --networkid=${NETWORK_ID}
+    ports:
+      - "8548:8545"
+      - "30308:30303"
+    networks:
+      priv-eth-net:
 
 networks:
   priv-eth-net:
