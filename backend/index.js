@@ -32,8 +32,8 @@ app.post('/api/upload', (req, res, next) => {
         const file = files.file[0];
         const fileBuffer = fs.readFileSync(file.filepath);
         try {
-            const result = await ipfs.add(fileBuffer);
-            console.log(result.path);
+            // const result = await ipfs.add(fileBuffer);
+            // console.log(result.path);
             res.status(200).json("Uploaded successfully!");
             // try {
             //     await storeFile(file_name, result.path);
@@ -50,15 +50,21 @@ app.post('/api/upload', (req, res, next) => {
     });
 });
 
-// app.get('/api/getStore', async (req, res) => {
-//
-//     try {
-//         let cur = await getFile();
-//         res.status(200).json(cur);
-//     } catch (error) {
-//         console.error('Transaction Error:', error);
-//         res.status(500).json({error: 'Transaction Error'});
-//     }
-// });
+app.get('/api/getStore', async (req, res) => {
+
+    // try {
+    //     let cur = await getFile();
+    //     res.status(200).json(cur);
+    // } catch (error) {
+    //     console.error('Transaction Error:', error);
+    //     res.status(500).json({error: 'Transaction Error'});
+    // }
+
+    let tmp = [{
+        "name": "bai1",
+        "cid": "Qme4u9HfFqYUhH4i34ZFBKi1ZsW7z4MYHtLxScQGndhgKE"
+    },]
+    res.status(200).json(tmp);
+});
 
 app.listen(PORT, () => console.log(`Your server is running successfully on port ${PORT}`));

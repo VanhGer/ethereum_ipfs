@@ -1,5 +1,6 @@
 import './Form.css';
 import {useState} from "react";
+import axios from 'axios';
 function Form() {
     const [fileName, setName] = useState("");
     const [file, setFile] = useState(null);
@@ -13,10 +14,28 @@ function Form() {
         setName(selectedFile.name);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Tên file:', fileName);
-        console.log('File:', file);
+        if (file === null) {
+            alert("File cannot be empty!");
+            return;
+        }
+        if (fileName === "") {
+            alert("Filename cannot be empty!");
+        }
+        const formData = new FormData;
+        formData.append('file', file);
+        formData.append('name', fileName);
+        try {
+            const response = await axios.post('http://localhost:4000/api/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            console.log('Uploaded Successfully:', response.data);
+        } catch (error) {
+            console.error('Error:', error);
+        }
     };
 
     return (
