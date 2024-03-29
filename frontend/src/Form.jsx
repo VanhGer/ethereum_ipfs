@@ -33,8 +33,10 @@ function Form() {
                 }
             });
             console.log('Uploaded Successfully:', response.data);
+            alert("File uploaded successfully!")
         } catch (error) {
             console.error('Error:', error);
+            alert("File uploaded unsuccessfully");
         }
     };
 

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import './StoredList.css'
 function StoredList({items}) {
 
     const handleFileNameClick = (item) => {
@@ -10,7 +11,7 @@ function StoredList({items}) {
             <h2>Stored List</h2>
             {items.map(item => (
                 <div className={"listRow"}>
-                    <div className={"fileName"} onClick={() => handleFileNameClick(item)}>{item.name}</div>
+                    <a className={"fileName"} onClick={() => handleFileNameClick(item)}>{item.name}</a>
                 </div>
                 )
             )}

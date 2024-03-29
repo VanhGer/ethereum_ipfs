@@ -1,0 +1,36 @@
+.storedList {
+    margin-top: 20px;
+}
+
+.storedList h2 {
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.fileName {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.fileName:hover {
+    color: #0056b3;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+.listRow {
+    padding: 10px;
+    background-color:  #e9ecef;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    width: 30%;
+    transition: background-color 0.3s ease;
+}
+
+.listRow:hover {
+    background-color:#b5cbe1;
+}

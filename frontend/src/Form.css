@@ -1,11 +1,45 @@
-.fileForm {
+/* Form.css */
+.formGroup {
+    display: flex;
+    flex-direction: column;
     margin-bottom: 20px;
 }
 
-.nameForm {
-    margin-bottom: 20px;
+.fileForm, .nameForm {
+    margin-bottom: 10px;
+}
+
+.fileForm label, .nameForm label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.fileForm input[type="file"], .nameForm input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 30%;
 }
 
 .submitBtn {
-    color: #557e89;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submitBtn:hover {
+    background-color: #0056b3;
+}
+
+.successMessage {
+    padding: 10px;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
+    margin-top: 10px;
 }
