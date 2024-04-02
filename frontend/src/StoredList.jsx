@@ -3,7 +3,7 @@ import './StoredList.css'
 function StoredList({items}) {
 
     const handleFileNameClick = (item) => {
-        window.location.href = `http://localhost:8085/ipfs/${item.cid}`;
+        window.open(`http://localhost:8085/ipfs/${item.cid}`, '_blank');
     };
 
     return (

@@ -4,7 +4,7 @@ import cors from 'cors';
 import 'dotenv/config'
 import formidable, {errors as formidableErrors} from 'formidable';
 import fs from 'fs';
-// import {storeFile, getFile} from "./contract.js";
+import {storeFile, getFile} from "./contract.js";
 const IPFS_API_PORT = process.env.IPFS_API_PORT || 5005
 const ipfs = create(`http://127.0.0.1:${IPFS_API_PORT}`);
 
@@ -32,16 +32,16 @@ app.post('/api/upload', (req, res, next) => {
         const file = files.file[0];
         const fileBuffer = fs.readFileSync(file.filepath);
         try {
-            // const result = await ipfs.add(fileBuffer);
+            const result = await ipfs.add(fileBuffer);
             // console.log(result.path);
-            res.status(200).json("Uploaded successfully!");
-            // try {
-            //     await storeFile(file_name, result.path);
-            //     res.status(200).json("Uploaded successfully!");
-            // } catch (error) {
-            //     console.error('Transaction Error:', error);
-            //     res.status(500).json({ error: 'Internal server error' });
-            // }
+            // res.status(200).json("Uploaded successfully!");
+            try {
+                await storeFile(file_name, result.path);
+                res.status(200).json("Uploaded successfully!");
+            } catch (error) {
+                console.error('Transaction Error:', error);
+                res.status(500).json({ error: 'Internal server error' });
+            }
 
         } catch (error) {
             console.error('Error uploading file to IPFS:', error);
@@ -52,19 +52,28 @@ app.post('/api/upload', (req, res, next) => {
 
 app.get('/api/getStore', async (req, res) => {
 
-    // try {
-    //     let cur = await getFile();
-    //     res.status(200).json(cur);
-    // } catch (error) {
-    //     console.error('Transaction Error:', error);
-    //     res.status(500).json({error: 'Transaction Error'});
-    // }
+    try {
+        let cur = await getFile();
+        console.log(cur[0]);
+        const result = cur.map(item => {
+            return {
+                name: item[0],
+                cid: item[1]
+            };
+        });
+        console.log(result);
 
-    let tmp = [{
-        "name": "bai1",
-        "cid": "Qme4u9HfFqYUhH4i34ZFBKi1ZsW7z4MYHtLxScQGndhgKE"
-    },]
-    res.status(200).json(tmp);
+        res.status(200).json(result);
+    } catch (error) {
+        console.error('Transaction Error:', error);
+        res.status(500).json({error: 'Transaction Error'});
+    }
+
+    // let tmp = [{
+    //     "name": "bai1",
+    //     "cid": "Qme4u9HfFqYUhH4i34ZFBKi1ZsW7z4MYHtLxScQGndhgKE"
+    // },]
+    // res.status(200).json(tmp);
 });
 
 app.listen(PORT, () => console.log(`Your server is running successfully on port ${PORT}`));

@@ -14,5 +14,8 @@ docker compose build
 docker compose up
 
 ## unlock
+personal.unlockAccount(eth.accounts[0], <password>, 0)
 
+## transaction
+eth.sendTransaction({to: "0xb166b7aaed24a12b3dd5dfa668ba3b9d10b1950d", from: eth.accounts[0], value: 25000})
 
